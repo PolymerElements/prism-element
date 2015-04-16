@@ -14,7 +14,7 @@
     "/demo/",
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#0.8-preview",
+    "polymer": "Polymer/polymer#v0.8.0-rc.4",
     "prism": "prismjs/prism#gh-pages"
   }
 }
