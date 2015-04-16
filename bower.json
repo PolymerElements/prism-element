@@ -15,6 +15,6 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#0.8-preview",
-    "prism": "prismjs/prism#gh-pages"
+    "prism": "*"
   }
 }
