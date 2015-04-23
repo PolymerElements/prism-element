@@ -1,7 +1,7 @@
 {
   "name": "prism-highlighter",
   "description": "Prism-based syntax highlighting.",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "authors": [
     "The Polymer Project Authors (https://polymer.github.io/AUTHORS.txt)"
   ],
@@ -14,7 +14,7 @@
     "/demo/"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#v0.8.0-rc.6",
+    "polymer": "Polymer/polymer#v0.8.0-rc.7",
     "prism": "*"
   }
 }
