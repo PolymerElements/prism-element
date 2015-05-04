@@ -1,3 +1,1 @@
-# &lt;prism-highlighter&gt;
-
-Prism-based syntax highlighting.
+Prism.js import and syntax highlighting.
