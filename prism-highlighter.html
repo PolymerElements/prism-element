@@ -41,11 +41,11 @@ This flow is supported by [`<marked-element>`](https://github.com/PolymerElement
     },
 
     attached: function() {
-      this.parentElement.addEventListener(HIGHLIGHT_EVENT, this._handler);
+      Polymer.dom(this).parentNode.addEventListener(HIGHLIGHT_EVENT, this._handler);
     },
 
     detached: function() {
-      this.parentElement.removeEventListener(HIGHLIGHT_EVENT, this._handler);
+      Polymer.dom(this).parentNode.removeEventListener(HIGHLIGHT_EVENT, this._handler);
     },
 
     /**
