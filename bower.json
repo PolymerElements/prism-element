@@ -11,6 +11,10 @@
     "prism",
     "molecule"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PolymerElements/prism-element.git"
+  },
   "license": "http://polymer.github.io/LICENSE.txt",
   "homepage": "https://github.com/PolymerElements/prism-highlighter",
   "main": "prism-highlighter.html",
