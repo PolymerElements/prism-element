@@ -59,7 +59,12 @@ This flow is supported by [`<marked-element>`](https://github.com/PolymerElement
         return;
       }
 
+      if(event.detail._highlighted === true) {
+        return;
+      }
+
       var detail = event.detail;
+      detail._highlighted = true;
       detail.code = Prism.highlight(detail.code, this._detectLang(detail.code, detail.lang));
     },
 
