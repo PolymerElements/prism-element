@@ -18,6 +18,17 @@
       </template>
     </test-fixture>
 
+    <test-fixture id="double-highlight">
+      <template>
+        <simple-container id="container-0">
+          <prism-highlighter></prism-highlighter>
+          <simple-container id="container-1">
+            <prism-highlighter></prism-highlighter>
+          </simple-container>
+        </simple-container>
+      </template>
+    </test-fixture>
+
     <script>
       suite('<prism-highlighter>', function() {
           var el;
@@ -41,8 +52,6 @@
 
             expect(Prism.highlight.calledWithExactly('<foo>', Prism.languages.markup))
               .to.equal(true);
-
-            expect(ev._highlighted).to.equal(true);
           });
 
           test('warns on invalid syntax-highlight event', function() {
@@ -68,17 +77,11 @@
               code: '<foo>'
             };
 
-            el.fire('syntax-highlight', ev);
+            el = fixture('double-highlight');
+
+            el.querySelector('#container-1').fire('syntax-highlight', ev);
 
             expect(Prism.highlight.callCount).to.equal(1);
-            expect(ev._highlighted).to.equal(true);
-
-            var initialHighlight = ev.code;
-
-            el.fire('syntax-highlight', ev);
-
-            expect(Prism.highlight.callCount).to.equal(1);
-            expect(ev.code).to.equal(initialHighlight);
           });
 
           suite('applies simple lang detection if none specified', function() {
