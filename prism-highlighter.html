@@ -62,7 +62,7 @@ This flow is supported by [`<marked-element>`](https://github.com/PolymerElement
         return;
       }
 
-	  event.stopPropagation();
+      event.stopPropagation();
 
       var detail = event.detail;
       detail.code = Prism.highlight(detail.code, this._detectLang(detail.code, detail.lang));
