@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>prism-element basic tests</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+    <link href="../prism-highlighter.html" rel="import">
+    <link href="./simple-container.html" rel="import">
+  </head>
+  <body>
+    <test-fixture id="simple">
+      <template>
+        <simple-container>
+          <prism-highlighter></prism-highlighter>
+        </simple-container>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="double-highlight">
+      <template>
+        <simple-container id="container-0">
+          <prism-highlighter></prism-highlighter>
+          <simple-container id="container-1">
+            <prism-highlighter></prism-highlighter>
+          </simple-container>
+        </simple-container>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('<prism-highlighter>', function() {
+          var el;
+
+          setup(function() {
+            sinon.spy(Prism, 'highlight');
+            el = fixture('simple');
+          });
+
+          teardown(function() {
+            Prism.highlight.restore();
+          });
+
+          test('highlights on syntax-highlight event', function() {
+            var ev = {
+              code: '<foo>',
+              lang: 'markup'
+            };
+
+            el.fire('syntax-highlight', ev);
+
+            expect(Prism.highlight.calledWithExactly('<foo>', Prism.languages.markup))
+              .to.equal(true);
+          });
+
+          test('warns on invalid syntax-highlight event', function() {
+              var ev;
+
+              sinon.spy(console, 'warn');
+
+              el.fire('syntax-highlight');
+
+              expect(console.warn.callCount).to.equal(1);
+
+              ev = {
+              };
+
+              el.fire('syntax-highlight', ev);
+
+              expect(console.warn.callCount).to.equal(2);
+              expect(ev.code).to.equal(undefined);
+          });
+
+          test('ignores repeated highlights', function() {
+            var ev = {
+              code: '<foo>'
+            };
+
+            el = fixture('double-highlight');
+
+            el.querySelector('#container-1').fire('syntax-highlight', ev);
+
+            expect(Prism.highlight.callCount).to.equal(1);
+          });
+
+          suite('applies simple lang detection if none specified', function() {
+              test('detects as markup if begins with tag', function() {
+                var ev = {
+                  code: '<foo>'
+                };
+
+                el.fire('syntax-highlight', ev);
+
+                expect(Prism.highlight.calledWithExactly('<foo>', Prism.languages.markup))
+                  .to.equal(true);
+              });
+
+              test('detects as javascript if no tag at start', function() {
+                var ev = {
+                  code: 'return;'
+                };
+
+                el.fire('syntax-highlight', ev);
+
+                expect(Prism.highlight.calledWithExactly('return;', Prism.languages.javascript))
+                  .to.equal(true);
+              });
+          });
+
+          suite('detects language for abbreviated lang', function() {
+              test('detects js as javascript', function() {
+                var ev = {
+                  code: 'return;',
+                  lang: 'js'
+                };
+
+                el.fire('syntax-highlight', ev);
+
+                expect(Prism.highlight.calledWithExactly('return;', Prism.languages.javascript))
+                  .to.equal(true);
+              });
+
+              test('detects es as javascript', function() {
+                var ev = {
+                  code: 'return;',
+                  lang: 'es'
+                };
+
+                el.fire('syntax-highlight', ev);
+
+                expect(Prism.highlight.calledWithExactly('return;', Prism.languages.javascript))
+                  .to.equal(true);
+              });
+
+              test('detects c as clike', function() {
+                var ev = {
+                  code: 'return;',
+                  lang: 'c'
+                };
+
+                el.fire('syntax-highlight', ev);
+
+                expect(Prism.highlight.calledWithExactly('return;', Prism.languages.clike))
+                  .to.equal(true);
+              });
+          });
+      });
+    </script>
+  </body>
+</html>
