@@ -10,11 +10,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../../polymer/polymer.html">
-<link href="../prism-highlighter.html" rel="import">
+<link rel="import" href="../prism-highlighter.html">
+<link rel="import" href="../prism-theme-default.html">
 
 <dom-module id='prism-demo'>
   <template>
-    <style>
+    <style include="prism-theme-default">
       pre {
         padding: 0;
         margin: 0;
