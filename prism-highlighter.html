@@ -57,7 +57,7 @@ This flow is supported by [`<marked-element>`](https://github.com/PolymerElement
      */
     _highlight: function(event) {
       if (!event.detail || !event.detail.code) {
-        Polymer.Base._warn('Malformed', HIGHLIGHT_EVENT, 'event:', event.detail);
+        console.warn(`Malformed ${HIGHLIGHT_EVENT} event: ${event.detail}`);
         return;
       }
 
