@@ -48,7 +48,8 @@ This flow is supported by [`<marked-element>`](https://github.com/PolymerElement
       },
       highlighted: {
         type: String,
-        computed: '_computeHighlighted(code, lang)'
+        computed: '_computeHighlighted(code, lang)',
+        notify: true
       }
     },
 
