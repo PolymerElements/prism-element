@@ -38,16 +38,54 @@ This flow is supported by [`<marked-element>`](https://github.com/PolymerElement
 
     is: 'prism-highlighter',
 
+    properties: {
+      code: {
+        type: String
+      },
+      lang: {
+        type: String,
+        value: null
+      },
+      highlighted: {
+        type: String,
+        computed: '_computeHighlighted(code, lang)'
+      }
+    },
+
     ready: function() {
       this._handler = this._highlight.bind(this);
     },
 
     attached: function() {
-      (this.parentElement || this.parentNode.host).addEventListener(HIGHLIGHT_EVENT, this._handler);
+      var host = this.parentElement || (this.parentNode && this.parentNode.host);
+      if(host) {
+        host.addEventListener(HIGHLIGHT_EVENT, this._handler);
+      }
     },
 
     detached: function() {
-      (this.parentElement || this.parentNode.host).removeEventListener(HIGHLIGHT_EVENT, this._handler);
+      var host = this.parentElement || (this.parentNode && this.parentNode.host);
+      if(host) {
+        host.removeEventListener(HIGHLIGHT_EVENT, this._handler);
+      }
+    },
+
+    /**
+     * Highlight the given code with an
+     * optional language hint specified.
+     *
+     * @param {string} code The source being highlighted
+     * @param {string=} lang A language hint (e.g. "js").
+     */
+    highlight: function(code, lang) {
+      return Prism.highlight(code, this._detectLang(code, lang));
+    },
+
+    _computeHighlighted: function(code, lang) {
+      if(!code) {
+        return;
+      }
+      return this.highlight(code, lang);
     },
 
     /**
@@ -64,14 +102,14 @@ This flow is supported by [`<marked-element>`](https://github.com/PolymerElement
       event.stopPropagation();
 
       var detail = event.detail;
-      detail.code = Prism.highlight(detail.code, this._detectLang(detail.code, detail.lang));
+      detail.code = this.highlight(detail.code, detail.lang);
     },
 
     /**
      * Picks a Prism formatter based on the `lang` hint and `code`.
      *
      * @param {string} code The source being highlighted.
-     * @param {string=} lang A language hint (e.g. ````LANG`).
+     * @param {string=} lang A language hint (e.g. "js").
      * @return {!prism.Lang}
      */
     _detectLang: function(code, lang) {
