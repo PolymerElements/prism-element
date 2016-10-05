@@ -24,6 +24,12 @@ containing the source to highlight. The event detail can optionally contain a
 
 This flow is supported by [`<marked-element>`](https://github.com/PolymerElements/marked-element).
 
+You may also use this element with data-binding like so:
+
+```html
+<prism-element code="{{source}}" highlighted="{{result}}"></prism-element>
+```
+
 @element prism-highlighter
 @demo demo/index.html
 -->
@@ -39,17 +45,27 @@ This flow is supported by [`<marked-element>`](https://github.com/PolymerElement
     is: 'prism-highlighter',
 
     properties: {
+      /**
+       * The source to be highlighted
+       */
       code: {
         type: String
       },
+      /**
+       * An optional language hint, such as `js`
+       */
       lang: {
         type: String,
         value: null
       },
+      /**
+       * The highlighted source code
+       */
       highlighted: {
         type: String,
         computed: '_computeHighlighted(code, lang)',
-        notify: true
+        notify: true,
+        readOnly: true
       }
     },
 
