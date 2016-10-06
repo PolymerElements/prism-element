@@ -44,6 +44,7 @@ This flow is supported by [`<marked-element>`](https://github.com/PolymerElement
 
     attached: function() {
       (this.parentElement || this.parentNode.host).addEventListener(HIGHLIGHT_EVENT, this._handler);
+      this.fire('prism-highlighter-highlight-event-registered');
     },
 
     detached: function() {
