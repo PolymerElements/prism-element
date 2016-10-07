@@ -17,10 +17,21 @@ Syntax highlighting via [Prism](http://prismjs.com/).
 Place a `<prism-highlighter>` in your document, preferably as a direct child of
 `<body>`. 
 
+For shadow Dom support, make sure to import the html file with the theme:
+
+```
+<link rel="import" href="bower_components/prism-element/prism-theme-default.html">
+```
+and include the call the style:
+
+```
+<style is="custom-style" include="prism-theme-default"></style>
+```
+
 It will listen for `syntax-highlight` events on its parent element,
 and annotate the code being provided via that event.
 
-a `prism-highlighter-highlight-event-registered` event will be fired when the event listener is registered on the page.
+A `prism-highlighter-highlight-event-registered` event will be fired when the event listener is registered on the page.
 
 The `syntax-highlight` event's detail is expected to have a `code` property
 containing the source to highlight. The event detail can optionally contain a
