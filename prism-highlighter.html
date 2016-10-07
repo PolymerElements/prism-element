@@ -41,7 +41,12 @@ This flow is supported by [`<marked-element>`](https://github.com/PolymerElement
     ready: function() {
       this._handler = this._highlight.bind(this);
     },
-
+/**
+* Fired right after the syntax-highlight event listener is registered on the page.
+* this event signifies the prism-element is ready to intercept any highlight events.
+*
+* @event prism-highlighter-highlight-event-registered
+*/
     attached: function() {
       (this.parentElement || this.parentNode.host).addEventListener(HIGHLIGHT_EVENT, this._handler);
       this.fire('prism-highlighter-highlight-event-registered');
