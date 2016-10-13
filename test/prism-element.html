@@ -155,6 +155,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               });
           });
       });
+      
+  suite('Prism Highlighter fires a "prism-highlighter-highlight-event-registered" event ', function() {
+    var eventObj;
+
+    suiteSetup(function(){
+      document.addEventListener('prism-highlighter-highlight-event-registered',function(evt){
+        eventObj = evt.detail;
+      });
+    });
+
+    test('impSVG fixture is created', function() {
+      assert.isDefined(eventObj, 'event is defined');
+    });
+  });
     </script>
   </body>
 </html>
