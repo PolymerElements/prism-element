@@ -38,6 +38,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </template>
     </test-fixture>
 
+    <test-fixture id="simple-binding">
+      <template>
+        <prism-highlighter></prism-highlighter>
+      </template>
+    </test-fixture>
+
     <script>
       suite('<prism-highlighter>', function() {
           var el;
@@ -58,6 +64,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             };
 
             el.fire('syntax-highlight', ev);
+
+            expect(Prism.highlight.calledWithExactly('<foo>', Prism.languages.markup))
+              .to.equal(true);
+          });
+
+          test('highlights on highlight call', function() {
+            var el = fixture('simple-binding');
+
+            el.highlight('<foo>', 'markup');
 
             expect(Prism.highlight.calledWithExactly('<foo>', Prism.languages.markup))
               .to.equal(true);
@@ -152,6 +167,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                 expect(Prism.highlight.calledWithExactly('return;', Prism.languages.clike))
                   .to.equal(true);
+              });
+          });
+
+          suite('can be used via data-binding', function() {
+              setup(function() {
+                el = fixture('simple-binding');
+              });
+
+              test('highlights given code', function() {
+                expect(el.highlighted).to.equal(undefined);
+                el.code = 'return;';
+                expect(Prism.highlight.calledWithExactly('return;', Prism.languages.javascript))
+                  .to.equal(true);
+              });
+
+              test('highlights only when code is set', function() {
+                expect(el.highlighted).to.equal(undefined);
+                el.code = null;
+                expect(el.highlighted).to.equal(undefined);
+                expect(Prism.highlight.callCount).to.equal(0);
+                el.code = 'return;';
+                expect(Prism.highlight.callCount).to.equal(1);
               });
           });
       });
