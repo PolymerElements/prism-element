@@ -15,8 +15,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 Syntax highlighting via [Prism](http://prismjs.com/).
 
 Place a `<prism-highlighter>` in your document, preferably as a direct child of
-`<body>`. It will listen for `syntax-highlight` events on its parent element,
+`<body>`. 
+
+For shadow Dom support, make sure to import the html file with the theme:
+
+```
+<link rel="import" href="bower_components/prism-element/prism-theme-default.html">
+```
+and include the call the style:
+
+```
+<style is="custom-style" include="prism-theme-default"></style>
+```
+
+It will listen for `syntax-highlight` events on its parent element,
 and annotate the code being provided via that event.
+
+A `prism-highlighter-highlight-event-registered` event will be fired when the event listener is registered on the page.
 
 The `syntax-highlight` event's detail is expected to have a `code` property
 containing the source to highlight. The event detail can optionally contain a
@@ -71,9 +86,15 @@ This flow is supported by [`<marked-element>`](https://github.com/PolymerElement
     ready: function() {
       this._handler = this._highlight.bind(this);
     },
-
+/**
+* Fired right after the syntax-highlight event listener is registered on the page.
+* this event signifies the prism-element is ready to intercept any highlight events.
+*
+* @event prism-highlighter-highlight-event-registered
+*/
     attached: function() {
       (this.parentElement || this.parentNode.host).addEventListener(HIGHLIGHT_EVENT, this._handler);
+      this.fire('prism-highlighter-highlight-event-registered');
     },
 
     detached: function() {
