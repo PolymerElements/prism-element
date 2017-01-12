@@ -31,7 +31,7 @@
     "iron-component-page": "PolymerElements/iron-component-page#2.0-preview",
     "paper-styles": "PolymerElements/paper-styles#2.0-preview",
     "web-component-tester": "^4.0.0",
-    "test-fixture": "PolymerElements/test-fixture#custom-elements-v1"
+    "test-fixture": "PolymerElements/test-fixture#^2.0.0"
   },
   "variants": {
     "1.x": {
@@ -51,6 +51,6 @@
   "resolutions": {
     "webcomponentsjs": "v1",
     "polymer": "2.0-preview",
-    "test-fixture": "custom-elements-v1"
+    "test-fixture": "^2.0.0"
   }
 }
