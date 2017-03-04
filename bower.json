@@ -47,10 +47,5 @@
         "test-fixture": "PolymerElements/test-fixture#^1.0.0"
       }
     }
-  },
-  "resolutions": {
-    "webcomponentsjs": "v1",
-    "polymer": "2.0-preview",
-    "test-fixture": "^2.0.0"
   }
 }
