@@ -1,5 +1,2 @@
-import '../../polymer/polymer.js';
-import { Polymer } from '../../polymer/lib/legacy/polymer-fn.js';
-Polymer({
-  is: 'simple-container'
-});
+export class SimpleContainer extends HTMLElement {}
+customElements.define('simple-container', SimpleContainer);

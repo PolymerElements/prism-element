@@ -1,5 +1,5 @@
 import { Base } from '../polymer/polymer.js';
-import './prism-import.js';
+import '../../prismjs/prism.js';
 import { Polymer } from '../polymer/lib/legacy/polymer-fn.js';
 
 var HIGHLIGHT_EVENT = 'syntax-highlight';
@@ -7,7 +7,7 @@ var HIGHLIGHT_EVENT = 'syntax-highlight';
 Polymer({
 
   is: 'prism-highlighter',
-  
+
   properties: {
     /**
      * Adds languages outside of the core Prism languages.

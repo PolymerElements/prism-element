@@ -20,7 +20,15 @@
   "license": "http://polymer.github.io/LICENSE.txt",
   "homepage": "https://github.com/PolymerElements/prism-highlighter",
   "dependencies": {
-    "@polymer/polymer": "^3.0.0-pre.1"
+    "@polymer/polymer": "^3.0.0-pre.1",
+    "prismjs": "^1.6.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@polymer/paper-styles": "next",
+    "wct-browser-legacy": "^0.0.1-pre.3"
+  },
+  "resolutions": {
+    "type-detect": "1.0.0",
+    "supports-color": "3.1.2"
+  }
 }
