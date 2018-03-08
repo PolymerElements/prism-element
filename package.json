@@ -1,0 +1,10 @@
+{
+  "name": "@polymer/prism-element",
+  "private": true,
+  "description": "Prism.js import and syntax highlighting",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PolymerElements/prism-element.git"
+  },
+  "license": "BSD-3-Clause"
+}
