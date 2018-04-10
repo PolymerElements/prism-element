@@ -28,7 +28,7 @@ This flow is supported by [`<marked-element>`](https://github.com/PolymerElement
 @demo demo/index.html
 -->
 <script>
-(function() {
+  (function() {
 
   'use strict';
 
@@ -37,7 +37,7 @@ This flow is supported by [`<marked-element>`](https://github.com/PolymerElement
   Polymer({
 
     is: 'prism-highlighter',
-    
+
     properties: {
       /**
        * Adds languages outside of the core Prism languages.
@@ -73,11 +73,13 @@ This flow is supported by [`<marked-element>`](https://github.com/PolymerElement
     },
 
     attached: function() {
-      (this.parentNode.host || this.parentElement).addEventListener(HIGHLIGHT_EVENT, this._handler);
+      (this.parentNode.host || this.parentElement)
+          .addEventListener(HIGHLIGHT_EVENT, this._handler);
     },
 
     detached: function() {
-      (this.parentNode.host || this.parentElement).removeEventListener(HIGHLIGHT_EVENT, this._handler);
+      (this.parentNode.host || this.parentElement)
+          .removeEventListener(HIGHLIGHT_EVENT, this._handler);
     },
 
     /**
@@ -94,7 +96,8 @@ This flow is supported by [`<marked-element>`](https://github.com/PolymerElement
       event.stopPropagation();
 
       var detail = event.detail;
-      detail.code = Prism.highlight(detail.code, this._detectLang(detail.code, detail.lang));
+      detail.code = Prism.highlight(
+          detail.code, this._detectLang(detail.code, detail.lang));
     },
 
     /**
@@ -108,7 +111,8 @@ This flow is supported by [`<marked-element>`](https://github.com/PolymerElement
       if (!lang) {
         // Stupid simple detection if we have no lang, courtesy of:
         // https://github.com/robdodson/mark-down/blob/ac2eaa/mark-down.html#L93-101
-        return code.match(/^\s*</) ? Prism.languages.markup : Prism.languages.javascript;
+        return code.match(/^\s*</) ? Prism.languages.markup :
+                                     Prism.languages.javascript;
       }
 
       if (this.languages[lang]) {
@@ -129,6 +133,5 @@ This flow is supported by [`<marked-element>`](https://github.com/PolymerElement
     },
 
   });
-
-})();
+  })();
 </script>
