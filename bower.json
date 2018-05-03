@@ -17,7 +17,7 @@
   },
   "license": "http://polymer.github.io/LICENSE.txt",
   "homepage": "https://github.com/PolymerElements/prism-highlighter",
-  "main": "prism-highlighter.html",
+  "main": ["prism-highlighter.html", "prism-theme-default.html"],
   "ignore": [
     "/.*",
     "/test/"
