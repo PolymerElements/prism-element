@@ -34,6 +34,7 @@ This flow is supported by
 */
 Polymer({
   is: 'prism-highlighter',
+  _template: null,
 
   properties: {
     /**
